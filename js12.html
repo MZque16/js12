@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue Event Handling</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1 :style="{ color: textColor }">{{ message }}</h1>
+
+  <!-- Примеры обработчиков событий -->
+  <button @click="changeColor">Изменить цвет</button>
+  <input v-model="inputText" @input="updateText" placeholder="Введите текст">
+  <p @mouseover="showTooltip" @mouseleave="hideTooltip">Наведите для подсказки</p>
+  <input type="text" @keydown.enter="showAlert" placeholder="Нажмите Enter">
+
+  <!-- Используйте v-if для условного отображения -->
+  <div v-if="tooltipVisible" class="tooltip">Подсказка</div>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Привет, Vue!',
+      textColor: 'black',
+      inputText: '',
+      tooltipVisible: false
+    },
+    methods: {
+      changeColor() {
+        this.textColor = this.textColor === 'black' ? 'red' : 'black';
+      },
+      updateText() {
+        this.message = this.inputText;
+      },
+      showTooltip() {
+        this.tooltipVisible = true;
+      },
+      hideTooltip() {
+        this.tooltipVisible = false;
+      },
+      showAlert() {
+        alert('Enter был нажат!');
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
